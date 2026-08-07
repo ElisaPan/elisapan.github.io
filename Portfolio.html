@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elisa Pan — Software Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0a192f;
+    --bg-2: #0e2240;
+    --card: #112240;
+    --card-hover: #1a2f52;
+    --heading: #e6f1ff;
+    --body: #a8b6d6;
+    --body-dim: #8892b0;
+    --accent: #64ffda;
+    --accent-dim: rgba(100,255,218,0.12);
+    --line: rgba(230,241,255,0.08);
+    --sidebar-w: 400px;
+    --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background: var(--bg);
+    background-image: radial-gradient(ellipse 900px 500px at 15% 0%, rgba(100,255,218,0.05), transparent 60%);
+    color: var(--body);
+    font-family: var(--font);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a{ color: inherit; text-decoration: none; }
+  :focus-visible{ outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+  ::selection{ background: var(--accent); color: var(--bg); }
+  ul{ margin:0; padding:0; list-style:none; }
+  img{ max-width:100%; display:block; }
+
+  .layout{
+    display:flex;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  /* ---------------- SIDEBAR ---------------- */
+  .sidebar{
+    width: var(--sidebar-w);
+    flex-shrink: 0;
+    padding: 96px 56px 60px;
+  }
+  .sidebar-inner{
+    position: sticky;
+    top: 80px;
+  }
+  .name{
+    font-size: 44px;
+    font-weight: 800;
+    color: var(--heading);
+    letter-spacing: -0.015em;
+    line-height: 1.1;
+    margin: 0 0 12px;
+  }
+  .title{
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--heading);
+    margin: 0 0 20px;
+  }
+  .blurb{
+    font-size: 16px;
+    color: var(--body-dim);
+    max-width: 320px;
+    margin: 0 0 44px;
+  }
+
+  nav.side-nav ul{ display:flex; flex-direction: column; gap: 18px; }
+  nav.side-nav a{
+    display:flex;
+    align-items:center;
+    gap: 14px;
+    font-size: 12.5px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--body-dim);
+    text-transform: uppercase;
+    padding: 4px 0;
+    transition: color .2s ease;
+  }
+  nav.side-nav a .bar{
+    height: 1px;
+    width: 24px;
+    background: var(--body-dim);
+    transition: width .2s ease, background .2s ease;
+  }
+  nav.side-nav a:hover{ color: var(--heading); }
+  nav.side-nav a:hover .bar{ background: var(--heading); }
+  nav.side-nav a.active{ color: var(--heading); }
+  nav.side-nav a.active .bar{ width: 48px; background: var(--accent); }
+
+  .social{
+    display:flex;
+    gap: 20px;
+    margin-top: 56px;
+  }
+  .social a{
+    color: var(--body-dim);
+    transition: color .2s ease, transform .2s ease;
+  }
+  .social a:hover{ color: var(--accent); transform: translateY(-2px); }
+
+  /* ---------------- MAIN CONTENT ---------------- */
+  main{
+    flex: 1;
+    min-width: 0;
+    padding: 96px 64px 120px 0;
+  }
+  .resume-link{
+    display:flex;
+    justify-content:flex-end;
+    margin-bottom: 64px;
+  }
+  .resume-link a{
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--heading);
+    display:flex;
+    align-items:center;
+    gap:6px;
+    border-bottom: 1px solid transparent;
+    padding-bottom: 2px;
+    transition: color .2s ease, border-color .2s ease;
+  }
+  .resume-link a:hover{ color: var(--accent); border-color: var(--accent); }
+
+  section{
+    max-width: 760px;
+    margin-bottom: 100px;
+    scroll-margin-top: 90px;
+  }
+  section:last-child{ margin-bottom: 60px; }
+
+  .eyebrow{
+    display:flex;
+    align-items:center;
+    gap: 14px;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--heading);
+    margin: 0 0 36px;
+  }
+  .eyebrow::after{
+    content:'';
+    flex:1;
+    height:1px;
+    background: var(--line);
+  }
+
+  #about p{
+    font-size: 16.5px;
+    color: var(--body);
+    margin: 0 0 18px;
+    max-width: 640px;
+  }
+  #about p b, #about p strong{ color: var(--heading); font-weight: 600; }
+
+  /* ---------------- EDUCATION ---------------- */
+  .edu-card{
+    padding: 22px;
+    margin: 0 -22px;
+    border-radius: 8px;
+    transition: background .2s ease;
+  }
+  .edu-card:hover{ background: var(--card); }
+  .edu-school{
+    font-size: 16.5px;
+    font-weight: 600;
+    color: var(--heading);
+    margin: 0 0 2px;
+  }
+  .edu-degree{ font-size: 15px; color: var(--body-dim); margin: 0 0 4px; }
+  .edu-meta{
+    font-size: 12.5px;
+    color: var(--body-dim);
+    margin: 0 0 16px;
+    letter-spacing: .02em;
+  }
+  .edu-meta .accent{ color: var(--accent); }
+
+  /* ---------------- EXPERIENCE ---------------- */
+  .job{
+    display:grid;
+    grid-template-columns: 150px 1fr;
+    gap: 24px;
+    padding: 22px;
+    margin: 0 -22px 4px;
+    border-radius: 8px;
+    transition: background .2s ease;
+  }
+  .job:hover{ background: var(--card); }
+  .job-year{
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--body-dim);
+    text-transform: uppercase;
+    padding-top: 3px;
+  }
+  .job-role{
+    font-size: 16.5px;
+    font-weight: 600;
+    color: var(--heading);
+    margin: 0 0 4px;
+    display:flex;
+    align-items:center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .job-role .company{ color: var(--accent); }
+  .job-desc{ font-size: 15px; color: var(--body-dim); margin: 0 0 14px; }
+  .job-desc ul{ margin: 0; padding-left: 18px; list-style: disc; }
+  .job-desc li{ margin-bottom: 6px; }
+  .tag-row{ display:flex; flex-wrap: wrap; gap: 8px; }
+  .tag{
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--accent);
+    background: var(--accent-dim);
+    padding: 4px 10px;
+    border-radius: 4px;
+  }
+
+  /* ---------------- PROJECTS ---------------- */
+  .project{
+    display:grid;
+    grid-template-columns: 220px 1fr;
+    gap: 26px;
+    padding: 20px;
+    margin: 0 -20px 8px;
+    border-radius: 10px;
+    align-items: start;
+    transition: background .2s ease;
+  }
+  .project:hover{ background: var(--card); }
+  .project-thumb{
+    width: 100%;
+    aspect-ratio: 16/10;
+    border-radius: 6px;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--card-hover), var(--bg-2));
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color: var(--body-dim);
+    font-size: 11.5px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border: 1px solid var(--line);
+    text-align: center;
+    padding: 12px;
+  }
+  .project-thumb img{ width:100%; height:100%; object-fit: cover; }
+  .project-title{
+    font-size: 16.5px;
+    font-weight: 600;
+    color: var(--heading);
+    display:flex;
+    align-items:center;
+    gap: 7px;
+    margin: 0 0 8px;
+    transition: color .2s ease;
+  }
+  .project:hover .project-title{ color: var(--accent); }
+  .project-title svg{ width: 13px; height: 13px; opacity: .7; flex-shrink:0; }
+  .project-desc{ font-size: 15px; color: var(--body-dim); margin: 0 0 14px; }
+  .project-meta{
+    font-size: 12.5px;
+    color: var(--body-dim);
+    margin-bottom: 12px;
+    letter-spacing: .02em;
+  }
+
+  .other-projects{
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-top: 8px;
+  }
+  .mini-card{
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 22px;
+    transition: transform .2s ease, border-color .2s ease;
+  }
+  .mini-card:hover{ transform: translateY(-4px); border-color: rgba(100,255,218,0.3); }
+  .mini-card-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    margin-bottom: 18px;
+  }
+  .folder-icon{ color: var(--accent); }
+  .mini-card-links{ display:flex; gap: 12px; color: var(--body-dim); }
+  .mini-card-links a:hover{ color: var(--accent); }
+  .mini-card h4{ font-size: 16px; font-weight: 600; color: var(--heading); margin: 0 0 10px; }
+  .mini-card p{ font-size: 14px; color: var(--body-dim); margin: 0 0 20px; }
+  .mini-tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap: 6px 12px;
+    font-size: 12px;
+    color: var(--body-dim);
+    font-weight: 500;
+  }
+
+  /* ---------------- FOOTER ---------------- */
+  footer{
+    text-align:center;
+    padding: 40px 20px 60px;
+    font-size: 12.5px;
+    color: var(--body-dim);
+  }
+  footer a{ color: var(--accent); }
+
+  @media (max-width: 980px){
+    .layout{ flex-direction: column; }
+    .sidebar{ width: 100%; position: static; padding: 56px 28px 20px; }
+    .sidebar-inner{ position: static; }
+    .blurb{ max-width: none; }
+    nav.side-nav{ display:none; }
+    .social{ margin-top: 28px; }
+    main{ padding: 20px 28px 80px; }
+    .resume-link{ display:none; }
+    .job, .project{ grid-template-columns: 1fr; }
+    .project-thumb{ aspect-ratio: 16/9; }
+    .other-projects{ grid-template-columns: 1fr; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+    *{ transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="layout">
+
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+      <p class="name">Elisa Pan</p>
+      <p class="title">CS Student · Full-Stack &amp; Mobile Engineer</p>
+      <p class="blurb">I build full-stack systems and mobile apps for real users — currently studying Computer Science at Cornell.</p>
+
+      <nav class="side-nav" aria-label="Section navigation">
+        <ul>
+          <li><a href="#about" data-section="about"><span class="bar"></span>About</a></li>
+          <li><a href="#education" data-section="education"><span class="bar"></span>Education</a></li>
+          <li><a href="#experience" data-section="experience"><span class="bar"></span>Experience</a></li>
+          <li><a href="#projects" data-section="projects"><span class="bar"></span>Projects</a></li>
+        </ul>
+      </nav>
+
+      <div class="social" aria-label="Social links">
+        <a href="https://github.com/ElisaPan" aria-label="GitHub" target="_blank" rel="noopener">
+          <svg width="21" height="21" viewBox="0 0 24 24" fill="none"><path d="M12 .5C5.6.5.5 5.7.5 12.2c0 5.2 3.4 9.6 8 11.1.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.5-4-1.5-.5-1.3-1.2-1.7-1.2-1.7-1-.7.1-.7.1-.7 1.1.1 1.7 1.1 1.7 1.1 1 1.6 2.6 1.2 3.2.9.1-.7.4-1.2.7-1.5-2.6-.3-5.4-1.3-5.4-5.8 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2A11 11 0 0 1 12 6.2c1 0 2 .1 3 .4 2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.5-2.8 5.5-5.4 5.8.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.5 8-6 8-11.1C23.5 5.7 18.4.5 12 .5Z" fill="currentColor"/></svg>
+        </a>
+        <a href="https://linkedin.com/in/elisa-pan-ep" aria-label="LinkedIn" target="_blank" rel="noopener">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM.5 8.98h9v14.52h-9V8.98Zm14.5 0h4.32v1.98h.06c.6-1.14 2.07-2.34 4.26-2.34 4.56 0 5.4 3 5.4 6.9v8h-4.5v-7.1c0-1.7-.03-3.9-2.38-3.9-2.38 0-2.74 1.86-2.74 3.78v7.22h-4.42V8.98Z" fill="currentColor"/></svg>
+        </a>
+        <a href="mailto:ep554@cornell.edu" aria-label="Email">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.6"/><path d="m2.5 6.5 9.5 7 9.5-7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ============ MAIN CONTENT ============ -->
+  <main>
+    <div class="resume-link">
+      <a href="#">View Full Resume
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M7 17 17 7M17 7H8m9 0v9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <h2 class="eyebrow">About</h2>
+      <p>I'm a Computer Science student at Cornell University, with minors in <b>Artificial Intelligence</b> and <b>Business</b>. I like turning ambiguous requirements into shipped software — especially projects where I get to own something end to end, from architecture to deployment.</p>
+      <p>Currently, I'm an <b>Innovation Intern</b> at <b>OneHope</b>, where I independently designed and built a full-stack internal admin portal syncing 370+ digital-asset-management users, complete with Microsoft SSO and an access-request workflow used directly by directors and IT. I'm also the <b>Lead Mobile Developer</b> at <b>CampusCares</b>, leading our transition from a React + Flask web platform to React Native for a platform serving 400+ users across 50+ campus organizations.</p>
+      <p>I also teach advanced Python and web development to middle schoolers through <b>Girls Who Code</b>, and outside of work you'll usually find me building something just for fun — a game in Godot, a networked Battleship implementation in OCaml, or whatever course project is due next.</p>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education">
+      <h2 class="eyebrow">Education</h2>
+      <div class="edu-card">
+        <p class="edu-school">Cornell University, College of Arts and Sciences</p>
+        <p class="edu-degree">B.A. in Computer Science · Minors in Artificial Intelligence &amp; Business</p>
+        <p class="edu-meta"><span class="accent">GPA 3.825/4.3</span> · Anticipated Graduation May 2028 · Ithaca, NY</p>
+        <div class="tag-row">
+          <span class="tag">Algorithms</span>
+          <span class="tag">Data Structures &amp; Functional Programming</span>
+          <span class="tag">Computer Vision</span>
+          <span class="tag">AI Reasoning &amp; Decision-Making</span>
+          <span class="tag">Linear Algebra</span>
+          <span class="tag">Statistics</span>
+          <span class="tag">Discrete Structures</span>
+          <span class="tag">OOP &amp; Data Structures</span>
+          <span class="tag">Android Development</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience">
+      <h2 class="eyebrow">Experience</h2>
+
+      <div class="job">
+        <div class="job-year">June — Aug 2026</div>
+        <div>
+          <p class="job-role">Innovation Intern · <span class="company">OneHope</span></p>
+          <div class="job-desc">
+            <ul>
+              <li>Worked directly under the Director of Innovation to scope a full-stack internal admin portal from an ambiguous starting brief, translating open-ended goals into a concrete technical plan.</li>
+              <li>Partnered closely with the Director of Software Development and the Director of Technology Design &amp; Management throughout the build, aligning the portal with existing IT infrastructure, security practices, and support workflows.</li>
+              <li>Coordinated requirements, demos, and feedback directly with directors, IT staff, and end users across the organization, and built relationships with employees well beyond my immediate team.</li>
+              <li>Owned the project end to end, from initial scoping through documentation and handoff, presenting progress and decisions directly to leadership throughout the internship.</li>
+            </ul>
+          </div>
+          <div class="tag-row">
+            <span class="tag">React</span>
+            <span class="tag">C# / ASP.NET Core</span>
+            <span class="tag">Azure AD</span>
+            <span class="tag">Bynder API</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="job">
+        <div class="job-year">Feb 2026 — Present</div>
+        <div>
+          <p class="job-role">Lead Mobile Developer &amp; Full-Stack Engineer · <span class="company">CampusCares</span></p>
+          <div class="job-desc">
+            <ul>
+              <li>Independently leading the mobile app's transition to React Native from the existing React + Flask web platform, driving architecture decisions and ensuring feature parity between web and mobile.</li>
+              <li>Wrote 18k+ lines of TypeScript for authentication, navigation, API integration, and dynamic UI components.</li>
+              <li>Coordinate with backend and product leads to integrate features for a platform serving 400+ users across 50+ campus organizations, working directly with real users to improve usability.</li>
+            </ul>
+          </div>
+          <div class="tag-row">
+            <span class="tag">React Native</span>
+            <span class="tag">TypeScript</span>
+            <span class="tag">React</span>
+            <span class="tag">Flask</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="job">
+        <div class="job-year">Feb — May 2026</div>
+        <div>
+          <p class="job-role">Instructor, Advanced Track · <span class="company">Girls Who Code</span></p>
+          <div class="job-desc">
+            <ul>
+              <li>Taught weekly programming classes (Python, HTML/CSS/JS) to middle school students.</li>
+              <li>Mentored students individually, adapting explanations and debugging support to different skill levels.</li>
+              <li>Consistently received positive student feedback, with high engagement and retention across weekly sessions.</li>
+            </ul>
+          </div>
+          <div class="tag-row">
+            <span class="tag">Python</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">HTML &amp; CSS</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <h2 class="eyebrow">Projects</h2>
+
+      <div class="project">
+        <div class="project-thumb" id="thumb-hopegallery">screenshot goes here</div>
+        <div>
+          <p class="project-title">Hope Gallery Admin Portal
+            <svg viewBox="0 0 24 24" fill="none"><path d="M7 17 17 7M17 7H8m9 0v9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </p>
+          <div class="job-desc">
+            <ul>
+              <li>Built a full-stack internal portal that syncs and displays 370+ users from the organization's digital-asset platform, with role-scoped views and an access-request workflow.</li>
+              <li>Developed a C# background service syncing users from the Bynder REST API (OAuth 2.0) with pagination, scheduled daily refresh, and per-record error isolation.</li>
+              <li>Implemented Azure AD SSO (MSAL, JWT validation) with a three-tier role system scoping data visibility and actions per role.</li>
+            </ul>
+          </div>
+          <p class="project-meta">June – Aug 2026 · Solo project</p>
+          <div class="tag-row">
+            <span class="tag">React</span>
+            <span class="tag">C# / ASP.NET Core</span>
+            <span class="tag">Azure AD</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project">
+        <div class="project-thumb" id="thumb-campuscares">screenshot goes here</div>
+        <div>
+          <p class="project-title">CampusCares Mobile App
+            <svg viewBox="0 0 24 24" fill="none"><path d="M7 17 17 7M17 7H8m9 0v9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </p>
+          <p class="project-desc">Leading the React Native rewrite of a campus-wide platform serving 400+ students across 50+ organizations — 18k+ lines of TypeScript covering authentication, navigation, API integration, and dynamic UI, built for feature parity with the existing React + Flask web app.</p>
+          <p class="project-meta">Feb 2026 – Present · Lead Mobile Developer</p>
+          <div class="tag-row">
+            <span class="tag">React Native</span>
+            <span class="tag">TypeScript</span>
+            <span class="tag">Flask</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="other-projects">
+        <div class="mini-card">
+          <div class="mini-card-top">
+            <svg class="folder-icon" width="34" height="34" viewBox="0 0 24 24" fill="none"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z" stroke="currentColor" stroke-width="1.6"/></svg>
+            <div class="mini-card-links">
+              <a href="#" aria-label="Source"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 .5C5.6.5.5 5.7.5 12.2c0 5.2 3.4 9.6 8 11.1.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.5-4-1.5-.5-1.3-1.2-1.7-1.2-1.7-1-.7.1-.7.1-.7 1.1.1 1.7 1.1 1.7 1.1 1 1.6 2.6 1.2 3.2.9.1-.7.4-1.2.7-1.5-2.6-.3-5.4-1.3-5.4-5.8 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2A11 11 0 0 1 12 6.2c1 0 2 .1 3 .4 2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.5-2.8 5.5-5.4 5.8.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.5 8-6 8-11.1C23.5 5.7 18.4.5 12 .5Z" fill="currentColor"/></svg></a>
+            </div>
+          </div>
+          <h4>Heirs of Ash and Ruin</h4>
+          <p>A narrative-driven game built solo in Godot — event-driven gameplay systems for state management, timers, and entity interactions, with a modular architecture tracking player, enemy, and world state across multi-phase encounters.</p>
+          <div class="mini-tags"><span>Godot</span><span>GDScript</span></div>
+        </div>
+
+        <div class="mini-card">
+          <div class="mini-card-top">
+            <svg class="folder-icon" width="34" height="34" viewBox="0 0 24 24" fill="none"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z" stroke="currentColor" stroke-width="1.6"/></svg>
+            <div class="mini-card-links">
+              <a href="#" aria-label="Source"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 .5C5.6.5.5 5.7.5 12.2c0 5.2 3.4 9.6 8 11.1.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.5-4-1.5-.5-1.3-1.2-1.7-1.2-1.7-1-.7.1-.7.1-.7 1.1.1 1.7 1.1 1.7 1.1 1 1.6 2.6 1.2 3.2.9.1-.7.4-1.2.7-1.5-2.6-.3-5.4-1.3-5.4-5.8 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2A11 11 0 0 1 12 6.2c1 0 2 .1 3 .4 2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.5-2.8 5.5-5.4 5.8.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.5 8-6 8-11.1C23.5 5.7 18.4.5 12 .5Z" fill="currentColor"/></svg></a>
+            </div>
+          </div>
+          <h4>Battleship Game</h4>
+          <p>Co-built a multiplayer Battleship game in OCaml with a client–server architecture. Led data-structure and module-interface design so the team could build in parallel; 85%+ test coverage.</p>
+          <div class="mini-tags"><span>OCaml</span><span>Networking</span></div>
+        </div>
+
+        <div class="mini-card">
+          <div class="mini-card-top">
+            <svg class="folder-icon" width="34" height="34" viewBox="0 0 24 24" fill="none"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z" stroke="currentColor" stroke-width="1.6"/></svg>
+            <div class="mini-card-links">
+              <a href="#" aria-label="Source"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 .5C5.6.5.5 5.7.5 12.2c0 5.2 3.4 9.6 8 11.1.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.5-4-1.5-.5-1.3-1.2-1.7-1.2-1.7-1-.7.1-.7.1-.7 1.1.1 1.7 1.1 1.7 1.1 1 1.6 2.6 1.2 3.2.9.1-.7.4-1.2.7-1.5-2.6-.3-5.4-1.3-5.4-5.8 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2A11 11 0 0 1 12 6.2c1 0 2 .1 3 .4 2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.5-2.8 5.5-5.4 5.8.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.5 8-6 8-11.1C23.5 5.7 18.4.5 12 .5Z" fill="currentColor"/></svg></a>
+            </div>
+          </div>
+          <h4>Robotics Scouting App</h4>
+          <p>A ~3k-line React web app for collecting and analyzing robotics competition data, used by the team during alliance selection.</p>
+          <div class="mini-tags"><span>React</span><span>Firebase</span></div>
+        </div>
+
+        <div class="mini-card">
+          <div class="mini-card-top">
+            <svg class="folder-icon" width="34" height="34" viewBox="0 0 24 24" fill="none"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z" stroke="currentColor" stroke-width="1.6"/></svg>
+          </div>
+          <h4>Coursework Highlights</h4>
+          <p>10k+ lines across Java, Python, and OCaml, implementing data structures, algorithms, and functional-programming concepts for Cornell's CS core sequence.</p>
+          <div class="mini-tags"><span>Java</span><span>Python</span><span>OCaml</span></div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      Built with HTML, CSS &amp; a little JS.
+    </footer>
+  </main>
+</div>
+
+<script>
+  const navLinks = document.querySelectorAll('.side-nav a');
+  const sections = document.querySelectorAll('section[id]');
+
+  const setActive = (id) => {
+    navLinks.forEach(link => link.classList.toggle('active', link.dataset.section === id));
+  };
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => { if (entry.isIntersecting) setActive(entry.target.id); });
+    }, { rootMargin: '-40% 0px -50% 0px', threshold: 0 });
+    sections.forEach(sec => observer.observe(sec));
+  }
+  setActive('about');
+</script>
+
+</body>
+</html>
