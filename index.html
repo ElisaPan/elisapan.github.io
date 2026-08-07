@@ -262,6 +262,17 @@
     padding: 12px;
   }
   .project-thumb img{ width:100%; height:100%; object-fit: cover; }
+  .thumb-split{
+    display:flex;
+    gap: 2px;
+    padding: 0;
+  }
+  .thumb-split img{
+    flex: 1;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+  }
   .project-title{
     font-size: 16.5px;
     font-weight: 600;
@@ -382,7 +393,7 @@
   <!-- ============ MAIN CONTENT ============ -->
   <main>
     <div class="resume-link">
-      <a href="#">View Full Resume
+      <a href="resume.pdf" target="_blank" rel="noopener">View Full Resume
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M7 17 17 7M17 7H8m9 0v9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
     </div>
@@ -391,7 +402,7 @@
     <section id="about">
       <h2 class="eyebrow">About</h2>
       <p>I'm a Computer Science student at Cornell University, with minors in <b>Artificial Intelligence</b> and <b>Business</b>. I like turning ambiguous requirements into shipped software — especially projects where I get to own something end to end, from architecture to deployment.</p>
-      <p>Currently, I'm an <b>Innovation Intern</b> at <b>OneHope</b>, where I independently designed and built a full-stack internal admin portal syncing 370+ digital-asset-management users, complete with Microsoft SSO and an access-request workflow used directly by directors and IT. I'm also the <b>Lead Mobile Developer</b> at <b>CampusCares</b>, leading our transition from a React + Flask web platform to React Native for a platform serving 400+ users across 50+ campus organizations.</p>
+      <p>Currently, I've just finished up an internship as an <b>Innovation Intern</b> at <b>OneHope</b>, where I independently designed and built a full-stack internal admin portal syncing 370+ digital-asset-management users, complete with Microsoft SSO and an access-request workflow used directly by directors and IT. I'm also the <b>Lead Mobile Developer</b> at <b>CampusCares</b>, leading our transition from a React + Flask web platform to React Native for a platform serving 400+ users across 50+ campus organizations.</p>
       <p>I also teach advanced Python and web development to middle schoolers through <b>Girls Who Code</b>, and outside of work you'll usually find me building something just for fun — a game in Godot, a networked Battleship implementation in OCaml, or whatever course project is due next.</p>
     </section>
 
@@ -486,11 +497,11 @@
       <h2 class="eyebrow">Projects</h2>
 
       <div class="project">
-        <div class="project-thumb" id="thumb-hopegallery">screenshot goes here</div>
+        <div class="project-thumb" id="thumb-hopegallery">
+          <img src="hopegallery.jpg" />
+        </div>
         <div>
-          <p class="project-title">Hope Gallery Admin Portal
-            <svg viewBox="0 0 24 24" fill="none"><path d="M7 17 17 7M17 7H8m9 0v9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </p>
+          <p class="project-title">Hope Gallery Admin Portal</p>
           <div class="job-desc">
             <ul>
               <li>Built a full-stack internal portal that syncs and displays 370+ users from the organization's digital-asset platform, with role-scoped views and an access-request workflow.</li>
@@ -508,7 +519,10 @@
       </div>
 
       <div class="project">
-        <div class="project-thumb" id="thumb-campuscares">screenshot goes here</div>
+        <div class="project-thumb thumb-split" id="thumb-campuscares">
+          <img src="campuscares1.jpg" />
+          <img src="campuscares2.jpg" />
+        </div>
         <div>
           <p class="project-title">CampusCares Mobile App
             <svg viewBox="0 0 24 24" fill="none"><path d="M7 17 17 7M17 7H8m9 0v9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -572,7 +586,7 @@
     </section>
 
     <footer>
-      Built with HTML, CSS &amp; a little JS.
+      Built with HTML, CSS, &amp; JS.
     </footer>
   </main>
 </div>
